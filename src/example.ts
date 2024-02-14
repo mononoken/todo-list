@@ -1,37 +1,28 @@
 import Todo from "./models/todo.ts";
 import Project from "./models/project.ts";
 
-export const todos = [
-  new Todo({
-    name: "something",
+export const projects: Project[] = [
+  new Project({
+    name: "Test Project",
+    todos: [
+      new Todo({
+        name: "something",
+      }),
+      new Todo({
+        name: "something else",
+      }),
+      new Todo({
+        name: "really important!",
+      }),
+    ],
   }),
-  new Todo({
-    name: "something else",
-  }),
-  new Todo({
-    name: "really important!",
+
+  new Project({
+    name: "Second Project",
+    todos: [
+      new Todo({
+        name: "in the second project",
+      }),
+    ],
   }),
 ];
-
-export const project: Project = {
-  id: 0,
-  name: "Test Project",
-  todos: todos,
-};
-
-// Test todos
-// export default () => {
-//   for (const todo of testTodos) {
-//     console.log(todo.name)
-//   }
-// };
-
-// Test project
-export default () => {
-  console.log("Project contains:");
-  for (const todo of project.todos) {
-    console.log(`${todo.id} ${todo.name}`);
-  }
-};
-
-// Test
