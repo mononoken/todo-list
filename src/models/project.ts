@@ -1,7 +1,9 @@
+import Todo from "./todo.ts";
+
 interface ProjectInterface {
-  id: number,
-  name: string,
-  todos: Todo[],
+  id: number;
+  name: string;
+  todos: Todo[];
 }
 
 interface ProjectOptions {

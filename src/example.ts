@@ -1,22 +1,22 @@
 import Todo from "./models/todo.ts";
 import Project from "./models/project.ts";
 
-const testTodos = [
-  new Todo ({
-    name:"something",
+export const todos = [
+  new Todo({
+    name: "something",
   }),
-  new Todo ({
+  new Todo({
     name: "something else",
   }),
-  new Todo ({
+  new Todo({
     name: "really important!",
-  })
+  }),
 ];
 
-const testProject: Project = {
+export const project: Project = {
   id: 0,
   name: "Test Project",
-  todos: testTodos,
+  todos: todos,
 };
 
 // Test todos
@@ -28,10 +28,10 @@ const testProject: Project = {
 
 // Test project
 export default () => {
-  console.log("Project contains:")
-  for (const todo of testProject.todos) {
-    console.log(`${todo.id} ${todo.name}`)
+  console.log("Project contains:");
+  for (const todo of project.todos) {
+    console.log(`${todo.id} ${todo.name}`);
   }
-}
+};
 
 // Test

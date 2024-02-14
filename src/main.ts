@@ -1,13 +1,17 @@
-import './style.css';
-// import models
-// import controller
-// import view
-import exampleFn from "./example.ts";
+import "./style.css";
+import { project as exampleProject } from "./example.ts"; // DELETE_ME
+import ProjectController from "./controllers/ProjectController.ts";
 
-exampleFn();
-
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    Hello, world!
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+  <h1>
+    Todo App
+  </h1>
+  <div id="content">
   </div>
 `;
+
+const controller: ProjectController = new ProjectController({
+  project: exampleProject,
+});
+
+controller.index();
