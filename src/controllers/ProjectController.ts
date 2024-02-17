@@ -1,25 +1,57 @@
 import Project from "./../models/project";
+import Environment from "./../environment.ts";
 import ProjectView from "./../views/ProjectViews.ts";
 
 interface ControllerInterface {
-  index(): void;
-}
-
-interface ProjectControllerOptions {
-  project: Project;
-  view?: ProjectView;
+  showAction(project: Project): void;
+  newAction(): void;
+  // create(project: Project): void;
 }
 
 export default class ProjectController implements ControllerInterface {
-  private contentContainer = <HTMLDivElement>document.querySelector("#content");
-
   constructor(
-    options: ProjectControllerOptions,
-    private project: Project = options.project,
-    private view: ProjectView = options.view || new ProjectView(),
+    private env: Environment,
+    private view: ProjectView = new ProjectView(),
   ) {}
 
-  index() {
-    this.contentContainer.appendChild(this.view.indexRender(this.project));
+  showAction(project: Project) {
+    this.replaceContent(this.view.showRender(project));
+  }
+
+  newAction(target: HTMLElement = this.getContentContainer()) {
+    const buttonAction = (event: Event) => {
+      event.preventDefault();
+
+      const projectParams = {
+        name: document.querySelector<HTMLInputElement>("form > input")!.value,
+      };
+
+      const project = new Project(projectParams);
+
+      this.env.setNewProject(project);
+      this.showAction(project);
+    };
+
+    this.replaceContent(this.view.newRender(buttonAction), target);
+  }
+
+  // create(project: Project) {}
+
+  private replaceContent(
+    content: HTMLDivElement,
+    target: HTMLElement = this.getContentContainer(),
+  ) {
+    // const contentContainer =
+    //   document.querySelector<HTMLDivElement>("#content")!;
+
+    const newContentContainer = document.createElement("div");
+    newContentContainer.id = "content";
+    newContentContainer.appendChild(content);
+
+    target.replaceWith(newContentContainer);
+  }
+
+  private getContentContainer(): HTMLDivElement {
+    return document.querySelector<HTMLDivElement>("#content")!;
   }
 }

@@ -1,30 +1,24 @@
 import "./style.css";
 import { projects as exampleProjects } from "./example.ts";
 import ProjectController from "./controllers/ProjectController.ts";
+import Environment from "./environment.ts";
+import renderNav from "./views/partials/nav.ts";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <nav>
-    <h1>
-      Todo App
-    </h1>
-    <ul class="projects"></ul>
-  </nav>
-  <div id="content">
-  </div>
-`;
+const env: Environment = new Environment();
+const projectController: ProjectController = new ProjectController(env);
 
-const projectsNav = document.querySelector<HTMLUListElement>("ul.projects")!;
-for (const project of exampleProjects) {
-  const li = document.createElement("li");
-  li.innerHTML = `
-    <div>${project.name}</div>
-  `;
+const appContainer = document.querySelector<HTMLDivElement>("#app")!;
 
-  projectsNav.appendChild(li);
+appContainer.appendChild(renderNav(env, projectController));
+
+const contentContainer = document.createElement("div");
+contentContainer.id = "content";
+
+appContainer.appendChild(contentContainer);
+
+const activeProject = env.getActiveProject();
+if (activeProject === undefined) {
+  projectController.newAction();
+} else {
+  projectController.showAction(activeProject);
 }
-
-const projectController: ProjectController = new ProjectController({
-  project: exampleProjects[0],
-});
-
-projectController.index();
