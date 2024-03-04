@@ -26,6 +26,7 @@ export default function renderNav(
         event.preventDefault();
 
         env.setActiveProject(project);
+        projectController.showAction(project);
       },
     );
 
