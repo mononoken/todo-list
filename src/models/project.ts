@@ -6,19 +6,48 @@ interface ProjectInterface {
   name: string;
 }
 
-interface ProjectOptions {
-  id?: number;
-  todos?: Todo[];
-  name: string;
-}
-
 let idCounter = 0;
 
 export default class Project implements ProjectInterface {
   constructor(
-    options: ProjectOptions,
-    public id: number = options.id || idCounter++,
-    public todos: Todo[] = options.todos || [],
-    public name: string = options.name,
+    public id: number = idCounter++,
+    public todos: Todo[] = [],
+    public name: string,
   ) {}
+
+  static getAll(): Project[] {
+    const projects = JSON.parse(localStorage.getItem("projects") || `""`);
+
+    if (projects === "") {
+      return [];
+    }
+
+    return projects;
+  }
+
+  static push(project: Project) {
+    const projects = Project.getAll();
+
+    const updatedProjects = projects.concat(project);
+
+    this.setAll(updatedProjects);
+  }
+
+  static setActive(project: Project = this.getAll()[0]) {
+    localStorage.setItem("activeProject", JSON.stringify(project));
+  }
+
+  static getActive(): Project | undefined {
+    const activeProject = localStorage.getItem("activeProject");
+
+    if (activeProject === null) {
+      return undefined;
+    }
+
+    return JSON.parse(activeProject);
+  }
+
+  private static setAll(projects: Project[]) {
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }
 }
