@@ -3,7 +3,13 @@ export * from "./todo";
 
 export class Model {
   protected static findNextID(): number {
-    return this.getAll().length + 1;
+    const models = this.getAll();
+
+    if (models.length === 0) {
+      return 0;
+    } else {
+      return models.length;
+    }
   }
 
   static getAll(): Model[] {
