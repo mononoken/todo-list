@@ -1,5 +1,5 @@
-import { Project, ProjectParams } from "../models/project.ts";
-import ProjectView from "../views/projectViews.ts";
+import { Project, ProjectParams } from "../models/project";
+import ProjectView from "../views/projectViews";
 
 interface ControllerInterface {
   showAction(): void;

@@ -1,5 +1,5 @@
-import { Project } from "./../models/models.ts";
-import Routes from "./../routes.ts";
+import { Project } from "./../models/models";
+import Routes from "./../routes";
 
 interface ProjectViewsInterface {
   showRender(project: Project): HTMLDivElement;

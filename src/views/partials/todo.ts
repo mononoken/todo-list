@@ -1,4 +1,4 @@
-import Todo from "../models/todo.ts";
+import Todo from "../models/todo";
 
 export default function render(todo: Todo) {
   const div = document.createElement("div");

@@ -1,1 +1,1 @@
-export type { ProjectParams } from "./models/project.ts";
+export type { ProjectParams } from "./models/project";

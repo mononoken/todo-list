@@ -1,5 +1,5 @@
-import * as Models from "./../../models/models.ts";
-import Routes from "../../routes.ts";
+import * as Models from "./../../models/models";
+import Routes from "../../routes";
 
 export default function renderNav(projects: Models.Project[]) {
   const nav = document.createElement("nav");

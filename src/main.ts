@@ -1,8 +1,8 @@
 import "./style.css";
-import Routes from "./routes.ts";
+import Routes from "./routes";
 
-import { Project } from "./models/models.ts";
-import renderNav from "./views/partials/nav.ts";
+import { Project } from "./models/models";
+import renderNav from "./views/partials/nav";
 
 const appContainer = document.querySelector<HTMLDivElement>("#app")!;
 

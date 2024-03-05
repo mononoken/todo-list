@@ -1,5 +1,5 @@
-import * as Controllers from "./controllers/controllers.ts";
-import * as Params from "./params.ts";
+import * as Controllers from "./controllers/controllers";
+import * as Params from "./params";
 
 export default class Routes {
   static get(resource: string, params: Params.ProjectParams = {}) {
