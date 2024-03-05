@@ -31,6 +31,7 @@ export class ProjectsController implements ControllerInterface {
 
     Project.push(project);
 
+    this.replaceContent(this.view.showRender(project));
   }
 
   private replaceContent(
