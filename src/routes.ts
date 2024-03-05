@@ -2,8 +2,8 @@ import * as Controllers from "./controllers/controllers.ts";
 import * as Params from "./params.ts";
 
 export default class Routes {
-  static get(key: string, params: Params.ProjectParams = {}) {
-    switch (key) {
+  static get(resource: string, params: Params.ProjectParams = {}) {
+    switch (resource) {
       case "project": {
         const controller = new Controllers.ProjectController(params);
         controller.showAction();
@@ -15,14 +15,28 @@ export default class Routes {
         break;
       }
       default: {
-        console.log("ERROR: key is not registered for this route");
+        console.log("ERROR: resource is not registered for this route");
         break;
       }
     }
   }
 
-  // static post(key: string) {
-  //   switch (key) {
+  static post(resource: string, params: Params.ProjectParams = {}) {
+    switch (resource) {
+      case "projects": {
+        const controller = new Controllers.ProjectController(params);
+        controller.createAction();
+        break;
+      }
+      default: {
+        console.log("ERROR: resource is not registered for this route");
+        return;
+      }
+    }
+  }
+
+  // static patch(resource: string) {
+  //   switch (resource) {
   //     case "project":
   //       return;
   //     default:
@@ -30,17 +44,8 @@ export default class Routes {
   //   }
   // }
   //
-  // static patch(key: string) {
-  //   switch (key) {
-  //     case "project":
-  //       return;
-  //     default:
-  //       return;
-  //   }
-  // }
-  //
-  // static delete(key: string) {
-  //   switch (key) {
+  // static delete(resource: string) {
+  //   switch (resource) {
   //     case "project":
   //       return;
   //     default:

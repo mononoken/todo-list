@@ -1,7 +1,9 @@
-import Project from "./../models/project";
+import { Project } from "./../models/models.ts";
+import Routes from "./../routes.ts";
 
 interface ProjectViewsInterface {
   showRender(project: Project): HTMLDivElement;
+  newRender(): HTMLDivElement;
 }
 
 export default class ProjectViews implements ProjectViewsInterface {
@@ -31,7 +33,7 @@ export default class ProjectViews implements ProjectViewsInterface {
     return div;
   }
 
-  newRender(buttonAction: (event: MouseEvent) => void) {
+  newRender() {
     const div = document.createElement("div");
     div.classList.add("project");
     div.innerHTML = `
@@ -53,6 +55,16 @@ export default class ProjectViews implements ProjectViewsInterface {
         <input type="submit">
       </form>
     `;
+
+    const buttonAction = (event: Event) => {
+      event.preventDefault();
+
+      const projectParams = {
+        name: document.querySelector<HTMLInputElement>("form > input")!.value,
+      };
+
+      Routes.post("projects", projectParams);
+    };
 
     form
       .querySelector<HTMLInputElement>('input[type="submit"]')!

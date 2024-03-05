@@ -14,26 +14,23 @@ export class ProjectController implements ControllerInterface {
 
   showAction() {
     const project = Project.get(this.params);
-    this.replaceContent(this.view.showRender(project));
+
+    if (project !== undefined) {
+      this.replaceContent(this.view.showRender(project));
+    } else {
+      console.log("ERROR: project not found");
+    }
   }
 
   newAction(target: HTMLElement = this.getContentContainer()) {
-    const buttonAction = (event: Event) => {
-      event.preventDefault();
-
-      const projectParams = {
-        name: document.querySelector<HTMLInputElement>("form > input")!.value,
-      };
-
-      const project = new Project(projectParams.name);
-
-      Project.push(project);
-    };
-
-    this.replaceContent(this.view.newRender(buttonAction), target);
+    this.replaceContent(this.view.newRender(), target);
   }
 
-  // create(project: Project) {}
+  createAction() {
+    const project = new Project(this.params);
+
+    Project.push(project);
+  }
 
   private replaceContent(
     content: HTMLDivElement,

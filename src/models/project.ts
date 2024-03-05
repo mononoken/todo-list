@@ -7,17 +7,19 @@ interface ProjectInterface {
 }
 
 export interface ProjectParams {
-  id?: number;
   name?: string;
+  id?: number;
+  todos?: Todo[];
 }
 
 let idCounter = 0;
 
 export class Project implements ProjectInterface {
   constructor(
-    public name: string,
-    public id: number = idCounter++,
-    public todos: Todo[] = [],
+    options: ProjectParams,
+    public name: string = options.name || "",
+    public id: number = options.id || idCounter++,
+    public todos: Todo[] = options.todos || [],
   ) {}
 
   static getAll(): Project[] {
