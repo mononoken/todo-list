@@ -6,7 +6,7 @@ interface ControllerInterface {
   newAction(): void;
 }
 
-export class ProjectController implements ControllerInterface {
+export class ProjectsController implements ControllerInterface {
   constructor(
     private params: ProjectParams,
     private view: ProjectView = new ProjectView(),
@@ -30,6 +30,7 @@ export class ProjectController implements ControllerInterface {
     const project = new Project(this.params);
 
     Project.push(project);
+
   }
 
   private replaceContent(

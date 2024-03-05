@@ -5,12 +5,12 @@ export default class Routes {
   static get(resource: string, params: Params.ProjectParams = {}) {
     switch (resource) {
       case "project": {
-        const controller = new Controllers.ProjectController(params);
+        const controller = new Controllers.ProjectsController(params);
         controller.showAction();
         break;
       }
       case "newProject": {
-        const controller = new Controllers.ProjectController(params);
+        const controller = new Controllers.ProjectsController(params);
         controller.newAction();
         break;
       }
@@ -24,7 +24,7 @@ export default class Routes {
   static post(resource: string, params: Params.ProjectParams = {}) {
     switch (resource) {
       case "projects": {
-        const controller = new Controllers.ProjectController(params);
+        const controller = new Controllers.ProjectsController(params);
         controller.createAction();
         break;
       }

@@ -1,1 +1,1 @@
-export * from "./projectController.ts";
+export * from "./projectsController.ts";
