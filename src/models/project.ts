@@ -2,17 +2,22 @@ import Todo from "./todo.ts";
 
 interface ProjectInterface {
   id: number;
-  todos: Todo[];
   name: string;
+  todos: Todo[];
+}
+
+export interface ProjectParams {
+  id?: number;
+  name?: string;
 }
 
 let idCounter = 0;
 
-export default class Project implements ProjectInterface {
+export class Project implements ProjectInterface {
   constructor(
+    public name: string,
     public id: number = idCounter++,
     public todos: Todo[] = [],
-    public name: string,
   ) {}
 
   static getAll(): Project[] {
@@ -23,6 +28,16 @@ export default class Project implements ProjectInterface {
     }
 
     return projects;
+  }
+
+  static get(params: ProjectParams): Project | undefined {
+    const projects = Project.getAll();
+
+    if (projects.length === 0 || params.id === undefined) {
+      return undefined;
+    }
+
+    return projects[params.id];
   }
 
   static push(project: Project) {

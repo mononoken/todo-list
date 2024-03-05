@@ -1,20 +1,19 @@
-import Project from "./../models/project";
-import Environment from "./../environment.ts";
-import ProjectView from "./../views/ProjectViews.ts";
+import { Project, ProjectParams } from "../models/project.ts";
+import ProjectView from "../views/projectViews.ts";
 
 interface ControllerInterface {
-  showAction(project: Project): void;
+  showAction(): void;
   newAction(): void;
-  // create(project: Project): void;
 }
 
-export default class ProjectController implements ControllerInterface {
+export class ProjectController implements ControllerInterface {
   constructor(
-    private env: Environment,
+    private params: ProjectParams,
     private view: ProjectView = new ProjectView(),
   ) {}
 
-  showAction(project: Project) {
+  showAction() {
+    const project = Project.get(this.params);
     this.replaceContent(this.view.showRender(project));
   }
 
@@ -26,10 +25,9 @@ export default class ProjectController implements ControllerInterface {
         name: document.querySelector<HTMLInputElement>("form > input")!.value,
       };
 
-      const project = new Project(projectParams);
+      const project = new Project(projectParams.name);
 
-      this.env.setNewProject(project);
-      this.showAction(project);
+      Project.push(project);
     };
 
     this.replaceContent(this.view.newRender(buttonAction), target);
