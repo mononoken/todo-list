@@ -10,7 +10,7 @@ interface TodoOptions {
 
 let idCounter = 0;
 
-export default class Todo implements TodoInterface {
+export class Todo implements TodoInterface {
   constructor(
     options: TodoOptions,
     public id: number = options.id || idCounter++,

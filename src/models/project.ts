@@ -1,4 +1,4 @@
-import Todo from "./todo.ts";
+import { Model, Todo } from "./models.ts";
 
 interface ProjectInterface {
   id: number;
@@ -12,15 +12,15 @@ export interface ProjectParams {
   todos?: Todo[];
 }
 
-let idCounter = 0;
-
-export class Project implements ProjectInterface {
+export class Project extends Model implements ProjectInterface {
   constructor(
     options: ProjectParams,
     public name: string = options.name || "",
-    public id: number = options.id || idCounter++,
+    public id: number = options.id || Project.findNextID(),
     public todos: Todo[] = options.todos || [],
-  ) {}
+  ) {
+    super();
+  }
 
   static getAll(): Project[] {
     const projects = JSON.parse(localStorage.getItem("projects") || `""`);

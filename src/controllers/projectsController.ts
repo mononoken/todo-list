@@ -38,9 +38,6 @@ export class ProjectsController implements ControllerInterface {
     content: HTMLDivElement,
     target: HTMLElement = this.getContentContainer(),
   ) {
-    // const contentContainer =
-    //   document.querySelector<HTMLDivElement>("#content")!;
-
     const newContentContainer = document.createElement("div");
     newContentContainer.id = "content";
     newContentContainer.appendChild(content);
