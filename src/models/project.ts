@@ -50,20 +50,6 @@ export class Project extends Model implements ProjectInterface {
     this.setAll(updatedProjects);
   }
 
-  static setActive(project: Project = this.getAll()[0]) {
-    localStorage.setItem("activeProject", JSON.stringify(project));
-  }
-
-  static getActive(): Project | undefined {
-    const activeProject = localStorage.getItem("activeProject");
-
-    if (activeProject === null) {
-      return undefined;
-    }
-
-    return JSON.parse(activeProject);
-  }
-
   private static setAll(projects: Project[]) {
     localStorage.setItem("projects", JSON.stringify(projects));
   }
