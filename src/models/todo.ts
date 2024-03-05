@@ -1,19 +1,21 @@
+import Model from "./model";
+
 interface TodoInterface {
   id: number;
   name: string;
 }
 
-interface TodoOptions {
+interface TodoParams {
   id?: number;
-  name: string;
+  name?: string;
 }
 
-let idCounter = 0;
-
-export class Todo implements TodoInterface {
+export class Todo extends Model implements TodoInterface {
   constructor(
-    options: TodoOptions,
-    public id: number = options.id || idCounter++,
-    public name: string = options.name,
-  ) {}
+    options: TodoParams,
+    public id: number = options.id || Todo.findNextID(),
+    public name: string = options.name || "",
+  ) {
+    super();
+  }
 }

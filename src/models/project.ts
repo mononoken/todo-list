@@ -1,4 +1,5 @@
-import { Model, Todo } from "./models";
+import Model from "./model";
+import { Todo } from "./models";
 
 interface ProjectInterface {
   id: number;
