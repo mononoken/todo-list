@@ -4,8 +4,8 @@ const nextIDLabel = "nextTodoID";
 export default class Todo {
   constructor(
     public name: string,
-    public description: string,
-    public completed: Date | null,
+    public description: string = "",
+    public completed: Date | null = null,
     public id: number = Todo.nextID(),
   ) {
     Todo.push(this);
