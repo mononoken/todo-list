@@ -14,6 +14,8 @@ export default class Todo {
 
   complete(date: Date = new Date()) {
     this.completed = date;
+
+    Todo.patch(this);
   }
 
   static getAll(): Todo[] {

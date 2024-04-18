@@ -11,6 +11,7 @@ const testTodo = new Todo("Test", "this is a test");
 console.log(testTodo);
 
 const nextTestTodo = new Todo("Another Test", "this is also a test");
+console.log(nextTestTodo);
 nextTestTodo.complete();
 console.log(nextTestTodo);
 
@@ -21,6 +22,3 @@ console.log(Todo.getAll());
 
 const testProject = new Project("Test Project");
 console.log(testProject);
-
-Todo.patch(nextTestTodo);
-console.log(Todo.getAll());
