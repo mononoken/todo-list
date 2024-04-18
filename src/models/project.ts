@@ -14,7 +14,7 @@ export default class Project {
   }
 
   get todos(): Todo[] {
-    return this.todoIDs.map((id) => Todo.get(id));
+    return this.todoIDs.map(Todo.get).filter(Todo.isTodo);
   }
 
   push(todo: Todo) {
@@ -22,6 +22,10 @@ export default class Project {
 
     Project.patch(this);
   }
+
+  // destroy() {
+  //   Project.destroy(this);
+  // }
 
   static getAll(): Project[] {
     const projects = localStorage.getItem(storageLabel);

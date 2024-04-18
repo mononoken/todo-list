@@ -22,6 +22,10 @@ export default class Todo {
     Todo.destroy(this);
   }
 
+  static isTodo(todo: Todo | undefined): todo is Todo {
+    return !!todo;
+  }
+
   static getAll(): Todo[] {
     const todos = localStorage.getItem(storageLabel);
 
