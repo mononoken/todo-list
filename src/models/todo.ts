@@ -39,13 +39,14 @@ export default class Todo {
   }
 
   static patch(updatedTodo: Todo) {
-    const updatedTodos = Todo.getAll().map((todo) => {
-      if (todo.id === updatedTodo.id) {
-        return updatedTodo;
-      } else {
-        return todo;
-      }
+    const todos = Todo.getAll();
+
+    const todoIndex = todos.findIndex((todo) => {
+      return todo.id === updatedTodo.id;
     });
+
+    const updatedTodos = [...todos];
+    updatedTodos[todoIndex] = updatedTodo;
 
     Todo.setAll(updatedTodos);
   }
