@@ -17,9 +17,11 @@ export default class Project {
     return this.todoIDs.map((id) => Todo.get(id));
   }
 
-  // push(todo: Todo) {
-  //   this.todos.push(todo);
-  // }
+  push(todo: Todo) {
+    this.todoIDs.push(todo.id);
+
+    Project.patch(this);
+  }
 
   static getAll(): Project[] {
     const projects = localStorage.getItem(storageLabel);

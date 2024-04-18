@@ -23,3 +23,6 @@ console.log(Todo.getAll());
 const testProject = new Project("Test Project", [1, 2]);
 console.log(testProject);
 console.log(testProject.todos);
+
+testProject.push(thirdTodo);
+console.log(Project.get(testProject.id));
