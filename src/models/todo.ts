@@ -53,6 +53,19 @@ export default class Todo {
     Todo.setAll(updatedTodos);
   }
 
+  static destroy(targetTodo: Todo) {
+    const todos = Todo.getAll();
+
+    const todoIndex = todos.findIndex((todo) => {
+      return todo.id === targetTodo.id;
+    });
+
+    const updatedTodos = [...todos];
+    updatedTodos.splice(todoIndex, 1);
+
+    Todo.setAll(updatedTodos);
+  }
+
   private static nextID(): number {
     const id = localStorage.getItem(nextIDLabel);
 

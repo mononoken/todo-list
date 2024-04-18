@@ -15,6 +15,9 @@ console.log(nextTestTodo);
 nextTestTodo.complete();
 console.log(nextTestTodo);
 
+const outsideTodo = new Todo("I am outside the project", "not included");
+console.log(outsideTodo);
+
 const thirdTodo = new Todo("Third Test", "three is a magic number");
 console.log(thirdTodo);
 
@@ -26,3 +29,7 @@ console.log(testProject.todos);
 
 testProject.push(thirdTodo);
 console.log(Project.get(testProject.id));
+console.log(testProject.todos);
+
+Todo.destroy(outsideTodo);
+console.log(Todo.getAll());
