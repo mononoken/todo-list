@@ -18,6 +18,10 @@ export default class Todo {
     Todo.patch(this);
   }
 
+  destroy() {
+    Todo.destroy(this);
+  }
+
   static getAll(): Todo[] {
     const todos = localStorage.getItem(storageLabel);
 

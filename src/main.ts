@@ -31,5 +31,5 @@ testProject.push(thirdTodo);
 console.log(Project.get(testProject.id));
 console.log(testProject.todos);
 
-Todo.destroy(outsideTodo);
+outsideTodo.destroy();
 console.log(Todo.getAll());
