@@ -9,7 +9,11 @@ export default class Todo {
     public id: number = Todo.nextID(),
   ) {
     Todo.push(this);
-    localStorage.setItem(nextIDLabel, id + 1);
+    localStorage.setItem(nextIDLabel, JSON.stringify(id + 1));
+  }
+
+  complete(date: Date = new Date()) {
+    this.completed = date;
   }
 
   static getAll(): Todo[] {
@@ -28,10 +32,22 @@ export default class Todo {
     return todos.find((todo) => todo.id === id);
   }
 
-  static push(todo) {
+  static push(todo: Todo) {
     const todos = Todo.getAll();
 
     this.setAll(todos.concat(todo));
+  }
+
+  static patch(updatedTodo: Todo) {
+    const updatedTodos = Todo.getAll().map((todo) => {
+      if (todo.id === updatedTodo.id) {
+        return updatedTodo;
+      } else {
+        return todo;
+      }
+    });
+
+    Todo.setAll(updatedTodos);
   }
 
   private static nextID(): number {
