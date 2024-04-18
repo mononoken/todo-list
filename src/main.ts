@@ -20,5 +20,6 @@ console.log(thirdTodo);
 
 console.log(Todo.getAll());
 
-const testProject = new Project("Test Project");
+const testProject = new Project("Test Project", [1, 2]);
 console.log(testProject);
+console.log(testProject.todos);
