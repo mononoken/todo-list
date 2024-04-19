@@ -1,16 +1,16 @@
 import Todo from "./todo";
 
-const storageLabel = "projects";
-const nextIDLabel = "nextProjectID";
-
 export default class Project {
+  static readonly STORAGE_LABEL = "projects";
+  static readonly NEXT_ID_LABEL = "nextProjectID";
+
   constructor(
     public name: string,
     private todoIDs: number[] = [],
     public id: number = Project.nextID(),
   ) {
     Project.push(this);
-    localStorage.setItem(nextIDLabel, JSON.stringify(id + 1));
+    localStorage.setItem(Project.NEXT_ID_LABEL, JSON.stringify(id + 1));
   }
 
   get todos(): Todo[] {
@@ -28,7 +28,7 @@ export default class Project {
   // }
 
   static getAll(): Project[] {
-    const projects = localStorage.getItem(storageLabel);
+    const projects = localStorage.getItem(Project.STORAGE_LABEL);
 
     if (projects === null) {
       return [];
@@ -63,10 +63,10 @@ export default class Project {
   }
 
   private static nextID(): number {
-    const id = localStorage.getItem(nextIDLabel);
+    const id = localStorage.getItem(Project.NEXT_ID_LABEL);
 
     if (id === null) {
-      localStorage.setItem(nextIDLabel, JSON.stringify(1));
+      localStorage.setItem(Project.NEXT_ID_LABEL, JSON.stringify(1));
 
       return 1;
     }
@@ -75,6 +75,6 @@ export default class Project {
   }
 
   private static setAll(projects: Project[]) {
-    localStorage.setItem(storageLabel, JSON.stringify(projects));
+    localStorage.setItem(Project.STORAGE_LABEL, JSON.stringify(projects));
   }
 }

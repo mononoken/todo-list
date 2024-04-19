@@ -1,7 +1,7 @@
-const storageLabel = "todos";
-const nextIDLabel = "nextTodoID";
-
 export default class Todo {
+  static readonly STORAGE_LABEL = "todos";
+  static readonly NEXT_ID_LABEL = "nextTodoID";
+
   constructor(
     public name: string,
     public description: string = "",
@@ -9,7 +9,7 @@ export default class Todo {
     public id: number = Todo.nextID(),
   ) {
     Todo.push(this);
-    localStorage.setItem(nextIDLabel, JSON.stringify(id + 1));
+    localStorage.setItem(Todo.NEXT_ID_LABEL, JSON.stringify(id + 1));
   }
 
   complete(date: Date = new Date()) {
@@ -27,7 +27,7 @@ export default class Todo {
   }
 
   static getAll(): Todo[] {
-    const todos = localStorage.getItem(storageLabel);
+    const todos = localStorage.getItem(Todo.STORAGE_LABEL);
 
     if (todos === null) {
       return [];
@@ -75,10 +75,10 @@ export default class Todo {
   }
 
   private static nextID(): number {
-    const id = localStorage.getItem(nextIDLabel);
+    const id = localStorage.getItem(Todo.NEXT_ID_LABEL);
 
     if (id === null) {
-      localStorage.setItem(nextIDLabel, JSON.stringify(1));
+      localStorage.setItem(Todo.NEXT_ID_LABEL, JSON.stringify(1));
 
       return 1;
     }
@@ -87,6 +87,6 @@ export default class Todo {
   }
 
   private static setAll(todos: Todo[]) {
-    localStorage.setItem(storageLabel, JSON.stringify(todos));
+    localStorage.setItem(Todo.STORAGE_LABEL, JSON.stringify(todos));
   }
 }
