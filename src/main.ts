@@ -5,15 +5,26 @@ import Project from "./models/project";
 const appContainer = document.querySelector<HTMLDivElement>("#app")!;
 appContainer.innerHTML = "Todo project";
 
+function test(condition: boolean): string {
+  return condition ? "pass" : "fail";
+}
+
 localStorage.clear();
 
+const tests = [];
+
 const testTodo = new Todo("Test", "this is a test");
+const testOne = testTodo.name == "Test";
+tests.push(testOne);
 console.log(testTodo);
+console.log(`test one: ${test(testOne)}`);
 
 const nextTestTodo = new Todo("Another Test", "this is also a test");
 console.log(nextTestTodo);
 nextTestTodo.complete();
-console.log(nextTestTodo);
+const testTwo = nextTestTodo !== null;
+tests.push(testTwo);
+console.log(`test two: ${test(testTwo)}`);
 
 const outsideTodo = new Todo("I am outside the project", "not included");
 console.log(outsideTodo);
@@ -21,15 +32,32 @@ console.log(outsideTodo);
 const thirdTodo = new Todo("Third Test", "three is a magic number");
 console.log(thirdTodo);
 
-console.log(Todo.getAll());
+const allTodos = Todo.getAll();
+console.log(allTodos);
+const testThree = allTodos.length === 4;
+tests.push(testThree);
+console.log(`test three: ${test(testThree)}`);
 
 const testProject = new Project("Test Project", [1, 2]);
 console.log(testProject);
-console.log(testProject.todos);
+const projectTodos = testProject.todos;
+console.log(projectTodos);
+const testFour = projectTodos.length === 2;
+tests.push(testFour);
+console.log(`test four: ${test(testFour)}`);
 
 testProject.push(thirdTodo);
-console.log(Project.get(testProject.id));
-console.log(testProject.todos);
+const updatedProjectTodos = testProject.todos;
+console.log(updatedProjectTodos);
+const testFive = updatedProjectTodos.length === 3;
+tests.push(testFive);
+console.log(`test five: ${test(testFive)}`);
 
 outsideTodo.destroy();
-console.log(Todo.getAll());
+const afterDeleteTodos = Todo.getAll();
+const testSix = afterDeleteTodos.length === 3;
+tests.push(testSix);
+console.log(`test six: ${test(testSix)}`);
+
+const allTests = tests.every((test) => test === true);
+console.log(`tests all (${tests.length}): ${test(allTests)}`);
