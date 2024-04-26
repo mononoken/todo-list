@@ -1,4 +1,5 @@
 import "./style.css";
+
 import Todo from "./models/todo";
 import Project from "./models/project";
 
@@ -32,7 +33,7 @@ console.log(outsideTodo);
 const thirdTodo = new Todo("Third Test", "three is a magic number");
 console.log(thirdTodo);
 
-const allTodos = Todo.getAll();
+const allTodos = Todo.all;
 console.log(allTodos);
 const testThree = allTodos.length === 4;
 tests.push(testThree);
@@ -40,11 +41,11 @@ console.log(`test three: ${test(testThree)}`);
 
 const testProject = new Project("Test Project", [1, 2]);
 console.log(testProject);
-const projectTodos = testProject.todos;
+const projectTodos = testProject.todos; // Error is here
 console.log(projectTodos);
 const testFour = projectTodos.length === 2;
 tests.push(testFour);
-console.log(`test four: ${test(testFour)}`);
+console.log(`test four (building a project with todos): ${test(testFour)}`);
 
 testProject.push(thirdTodo);
 const updatedProjectTodos = testProject.todos;
@@ -54,7 +55,7 @@ tests.push(testFive);
 console.log(`test five: ${test(testFive)}`);
 
 outsideTodo.destroy();
-const afterDeleteTodos = Todo.getAll();
+const afterDeleteTodos = Todo.all;
 const testSix = afterDeleteTodos.length === 3;
 tests.push(testSix);
 console.log(`test six: ${test(testSix)}`);
